@@ -70,6 +70,10 @@ func main() {
 	fmt.Println("list yeetInt sorted", yeetInt)
 	fmt.Println("list yootInt sorted", yootInt)
 
+	if len(yeetInt) != len(yootInt) {
+		log.Fatal("Error: yeetInt and yootInt not same length")
+	}
+
 	var sum int
 	for i, yoo := range yootInt {
 		for j, yee := range yeetInt {
@@ -84,8 +88,38 @@ func main() {
 	}
 	fmt.Println("finnal diff", sum)
 
-	// Check for errors that may have occurred during the scan
-	if err := scanner.Err(); err != nil {
-		log.Fatalf("Error reading file: %v", err)
+	// or use this method:
+	//
+	// var sumNew int
+	// for i := range yeetInt {
+	// 	diff := abs(yeetInt[i] - yootInt[i])
+	// 	sumNew += diff
+	// }
+	// fmt.Println("finnal diff", sum)
+	// // Check for errors that may have occurred during the scan
+	// if err := scanner.Err(); err != nil {
+	// 	log.Fatalf("Error reading file: %v", err)
+	// }
+
+	// part 2
+
+	var sum2 int
+	for _, yee := range yeetInt {
+		newYorkTimes := 0
+		for _, yoo := range yootInt {
+			if yee == yoo {
+				newYorkTimes++
+			}
+		}
+		sum2 += yee * newYorkTimes
 	}
+	fmt.Println("finnal diff", sum2)
 }
+
+// Absolute difference function
+// func abs(a int) int {
+// 	if a < 0 {
+// 		return -a
+// 	}
+// 	return a
+// }
